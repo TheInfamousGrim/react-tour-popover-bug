@@ -1,5 +1,6 @@
 "use client";
 
+// Icons - Solid
 import {
     ArrowPathIcon,
     ChevronRightIcon,
@@ -9,11 +10,16 @@ import {
     LockClosedIcon,
     ServerIcon,
 } from "@heroicons/react/20/solid";
+
+// Icons - Outline
 import {
     BoltIcon,
     CalendarDaysIcon,
     UsersIcon,
 } from "@heroicons/react/24/outline";
+
+// React Tour
+import { useTour } from "@reactour/tour";
 
 const primaryFeatures = [
     {
@@ -188,9 +194,24 @@ const footerNavigation = {
 };
 
 export default function Home() {
+    // React Tour state and hooks
+    const { isOpen, setIsOpen, setCurrentStep } = useTour();
+
     return (
         <>
             <main>
+                {/* React Tour Commence */}
+                <div className="flex items-center justify-center p-4">
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setCurrentStep(0);
+                            setIsOpen(true);
+                        }}
+                        className="shadow-sm rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Begin Tour
+                    </button>
+                </div>
                 {/* Hero section */}
                 <div className="relative isolate overflow-hidden">
                     <svg
@@ -272,6 +293,7 @@ export default function Home() {
                             <div className="mt-10 flex items-center gap-x-6">
                                 <a
                                     href="#"
+                                    data-tour="get-started-link"
                                     className="shadow-sm rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">
                                     Get started
                                 </a>
@@ -332,6 +354,7 @@ export default function Home() {
                         />
                         <img
                             className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+                            data-tour="statamic-logo"
                             src="https://tailwindui.com/img/logos/158x48/statamic-logo-white.svg"
                             alt="Statamic"
                             width={158}
@@ -357,9 +380,13 @@ export default function Home() {
                     </div>
                     <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
                         <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-                            {primaryFeatures.map((feature) => (
+                            {primaryFeatures.map((feature, idx) => (
                                 <div
                                     key={feature.name}
+                                    data-tour={`feature-${feature.name
+                                        .split(" ")
+                                        .join("-")
+                                        .toLowerCase()}-${idx}`}
                                     className="flex flex-col">
                                     <dt className="text-base font-semibold leading-7 text-white">
                                         <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500">
@@ -427,9 +454,13 @@ export default function Home() {
                     </div>
                     <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 md:mt-24 lg:px-8">
                         <dl className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-10 text-base leading-7 text-gray-300 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
-                            {secondaryFeatures.map((feature) => (
+                            {secondaryFeatures.map((feature, idx) => (
                                 <div
                                     key={feature.name}
+                                    data-tour={`feature-${feature.name
+                                        .split(" ")
+                                        .join("-")
+                                        .toLowerCase()}-${idx}`}
                                     className="relative pl-9">
                                     <dt className="inline font-semibold text-white">
                                         <feature.icon

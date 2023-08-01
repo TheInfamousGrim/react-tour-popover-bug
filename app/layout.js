@@ -1,16 +1,10 @@
-"use client";
-
 import "./globals.css";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// Deps
-import { useState } from "react";
-
 // Components
-import SideBar from "@/components/SideBar";
-import SearchHeader from "@/components/SearchHeader";
+import UserAppTour from "@/components/UserAppTour";
 
 export const metadata = {
     title: "Create Next App",
@@ -18,12 +12,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
     return (
         <html
             lang="en"
             className="h-full bg-gray-900">
-            <body className={`${inter.className} h-full`}>{children}</body>
+            <body className={`${inter.className} h-full`}>
+                <UserAppTour>{children}</UserAppTour>
+            </body>
         </html>
     );
 }
