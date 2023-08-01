@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     important: true,
-    corePlugins: {
-        preflight: false,
-    },
     content: [
         "./pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -65,5 +62,5 @@ module.exports = {
             DEFAULT: "0 2px 3px 0px rgba(0,0,0,.15)",
         },
     },
-    plugins: [],
+    plugins: [require("@tailwindcss/forms")],
 };
